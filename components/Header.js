@@ -13,19 +13,22 @@ const Header = () => {
 
       <View style={styles.iconsContainer}>
         <TouchableOpacity>
-          <View style={styles.icons}>
+          <View style={styles.iconsWrapper}>
             <Image
               source={require("../assets/more.png")}
-              style={styles.plusButton}
+              style={styles.icon}
             />
           </View>
         </TouchableOpacity>
 
         <TouchableOpacity>
-          <View style={styles.icons}>
+          <View style={styles.iconsWrapper}>
+            <View style={styles.unreadBadge}>
+              <Text style={styles.unreadBadgeText}>1</Text>
+            </View>
             <Image
               source={require("../assets/messenger.png")}
-              style={styles.messenger}
+              style={styles.icon}
             />
           </View>
         </TouchableOpacity>
@@ -58,17 +61,30 @@ const styles = StyleSheet.create({
     width: 95,
   },
 
-  plusButton: {
+  icon: {
     width: 28,
     height: 28,
   },
 
-  messenger: {
-    width: 28,
-    height: 28,
-  },
-
-  icons: {
+  iconsWrapper: {
     padding: 5,
+  },
+
+  unreadBadge: {
+    backgroundColor: '#FF3250',
+    position: 'absolute',
+    left: 20,
+    bottom: 21,
+    width: 20,
+    height: 18,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1,
+  },
+
+  unreadBadgeText: {
+    color: 'white',
+    fontWeight: '600',
   }
 });
