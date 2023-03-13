@@ -1,28 +1,36 @@
-import { StyleSheet, Text, View, SafeAreaView, Image } from 'react-native'
-import React from 'react'
-import Header from '../components/Header'
-import NewsFeed from '../components/NewsFeed'
-import BottomBar from '../components/BottomBar'
-import Stories from '../components/Stories'
+import { StyleSheet, SafeAreaView, ScrollView, View } from "react-native";
+import React from "react";
+import Header from "../components/Header";
+import Post from "../components/Post";
+import BottomBar from "../components/BottomBar";
+import Stories from "../components/Stories";
+import { POSTS } from "../data/posts";
 
 const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header/>
-      <Stories/>
-      <NewsFeed/>
-      <BottomBar/>
+      <Header />
+      <Stories />
+      <View style={{ flex: 12 }}>
+        <ScrollView>
+          {POSTS.map((post, index) => (
+            <Post post={post} key={index} />
+          ))}
+        </ScrollView>
+      </View>
+      <BottomBar />
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default HomeScreen
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    backgroundColor: 'black',
-    alignSelf: 'center',
-  }
-})
+    backgroundColor: "black",
+    alignItems: "center",
+    alignSelf: "center",
+    width: "100%",
+  },
+});

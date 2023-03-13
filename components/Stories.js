@@ -14,7 +14,7 @@ const Stories = () => {
           <View style={styles.addStoryIcon}>
             <Image source={require('../assets/add.png')} style={{width: 11, height: 11}}/>
           </View>
-          <Text style={{color: '#DBDBDB'}}>Your story</Text>
+          <Text style={{color: '#DBDBDB', fontSize: 11.5}}>Your story</Text>
         </View>
 
         {USERS.map((story, index) => (
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   storyWrapper: {
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: 15,
+    marginLeft: 12,
   },
 
   storyAvatarWrapper: {
