@@ -12,7 +12,7 @@ import { Divider } from "react-native-elements";
 const Post = ({ post }) => {
   return (
     <View style={styles.container}>
-      <Divider width={0.5} color="#828282" />
+      <Divider width={0.5} color="#383838" />
       <PostHeader post={post} />
       <PostImage post={post} />
       <View style={{ padding: 15 }}>

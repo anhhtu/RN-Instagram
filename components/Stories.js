@@ -27,8 +27,8 @@ const Stories = () => {
             </View>
 
             <Text style={styles.storyName}>
-              {story.name.length > 11
-                ? story.name.slice(0, 10).toLowerCase() + "..."
+              {story.name.length > 12
+                ? story.name.slice(0, 11).toLowerCase() + "..."
                 : story.name.toLowerCase()}
             </Text>
           </View>
@@ -43,6 +43,7 @@ export default Stories;
 const styles = StyleSheet.create({
   container: {
     flex: 2,
+    paddingBottom: 10,
   },
 
   storyAvatar: {
