@@ -2,7 +2,7 @@ import { StyleSheet, SafeAreaView, ScrollView, View } from "react-native";
 import React from "react";
 import Header from "../components/Header";
 import Post from "../components/Post";
-import BottomBar from "../components/BottomBar";
+import BottomBar, { bottomBarIcons } from "../components/BottomBar";
 import Stories from "../components/Stories";
 import { POSTS } from "../data/posts";
 
@@ -10,7 +10,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Header />
-      <View style={{ flex: 12 }}>
+      <View style={{ flex: 14 }}>
         <ScrollView>
           <Stories />
           {POSTS.map((post, index) => (
@@ -18,7 +18,7 @@ const HomeScreen = () => {
           ))}
         </ScrollView>
       </View>
-      <BottomBar icons={bottomBarIcons} />
+      <BottomBar icons={bottomBarIcons}/>
     </SafeAreaView>
   );
 };

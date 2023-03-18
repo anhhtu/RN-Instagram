@@ -58,13 +58,13 @@ const styles = StyleSheet.create({
   iconsContainer: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     width: 95,
   },
 
   icon: {
-    width: 25,
-    height: 25,
+    width: 23,
+    height: 23,
   },
 
   iconsWrapper: {

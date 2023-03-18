@@ -1,60 +1,79 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, {useState} from 'react'
+import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
+import React, { useState } from "react";
+import { Divider } from "react-native-elements";
 
-const BottomBar = ({icons}) => {
+const BottomBar = ({ icons }) => {
+  const [activeTab, setActiveTab] = useState("Home");
 
-  const bottomBarIcons = [
-    {
-      name: 'Home',
-      active: 'https://lh3.googleusercontent.com/nqJENoggDj5fMv1ctSHe_HI3e5trFa5QKJPh_H0jvAqZ6tKj2V-4B83tI7Eo3RUFZk70VYy_88YFatSvlk0Ob-Qtz3niUxub0kprSdIkNkrCq52QYTXf2mn84RMsOxFzjWbgKP1sey76pJ487FhCvX96RGbGNBmKKO6CAczpUDBbgvIjonb_Z2lYv8fppNGXdDKaPVijXGipPjR3wMhZQXacwWExSIbLyItL9R-6CE2wDe4csIFUXvK3noHk7bRVgoMR8pZrgnTBLIaQBKndjOMA4bFS8MglhdMdx-0u0641EnNLSXO02fcBFKSgzowosNUFPHZMUkGTZ7U6bVnvOK7h7Fv10ThMdcTHcwUEQRi1Kf5-dTj_XWuq0dxj20sb5SLbAte7qjSi7LYhOB4dVB8VghC7XRLym48nwzXAu1sPrxbgFtPCU1jYgosXQLehnNMaCq1ZcS2zH6y-JrCuRGhShRarFCSmq1I2aEkfK71pe8i6B9ethUsnSYGg7Z5WxlZSk2gTDlYkMV8sykytmY0F7ka2RYoVybxQfNQr0u4Cmpa5GdIgRz9q0SeO1x0FYpRH7k8G7wnc9Ke0w8rC9i0rD4S2BstdEjQXYTfw-40Pl2avKO6f57q1HmLuIQ2r2Rt_QHiCeXyX3gFnDiat0tG0nOFQfMoNFMaulyf4nhpM7KjPULv_mqpd-Zpn9_05dsGvk7pi6V3eWf_kRBEaOvpn2YwBog1JVjF_bNgdMklr4Ef8lCCp4A-o91YDrtOzU1LlEaa_j6OCJ_aiJxxTxllCwhmGPmjNOaagDjdlSQKsTYy1qY7sPwq3ADd8qVM8WUwLoCMoxEtKqBB00AYuPGOlCLyrYsmKT0ucLIGm9cebLCKmZWTwXWYi6Uj5YBLshdThkmqwem3teIJWCHDuxnUzOzwSfOJ60shdkxTFPcf_FdFXMv9clPyj4IuCQdP1qU6ce7mCCk0A6Z5XNkc=w128-h128-s-no?authuser=0',
-      inactive: 'https://lh3.googleusercontent.com/PI8Vqpwvdw094OWOGrXlTrmkYrfqUVflzvdjjONEy-JS3-1KgDsEN2Y2U_my6gaFjTD-D4p8xnUS-bo60o9NQ1aQ_2yYYsBbDQoDqVnk6mOSwm4Fjp0RAU3NdgLwZQzf-QOIMLWwdG0u6NlquOGg8dwoYf-BmlrCwRaBzNhvSp25Hl7E4d5P-sX_jYwRAWdyqTcickHTf6lUu8BdFFi1BBZRkP3_keaIuFJ_61gP6vlXKu8dKFMahNrEZrdtaLBS4TEJuBnmlyuHralylWsyEai-qd-MneCDcGJsk7uR7eTO1ph4-xiknppTPIFyx7n3Evr4V6DFlIpfF9FBTl-7UlFv1vQD8JkL9Fv2J5FZYj5GHn5xQYPLz_SF1rGZxlBtKJxxZbb7EClOCRhQuiuJJQcdondhpN62cDC1Cy9OzNwOYJSfpCJEuTsnQNM48Zh7z4pb02YUPwYrtP9oHxnBX27SytiIBAANzCuTB0qNGKbMYa5vRRcCzrYVxcgX1EKkA6JPemt2eah8u-UPel5UXjcpRDWom_d00jXD1cmpgGCcaLOo2u5md3lC161WRK7YlA7dWvMsG8NMtILvfybocw6mNi5TI69JXMAPzJOcza0si_ZDuZcGVqw9dt1fY_QyriDlChS_PcUdYPC1-nZV8OikPckcROX1yWOQjK1M0OqaCFp4OGGNaRksiPfEmXuyK2X6JJxLZAbdjAFUOyrpVXJQxhTI4KN84os3jd45Z5HPZYPBpczO00_qKyL8pnWE2-BmovhuJ_tV4fXZzhVsN8-g3efhRAfd2vlDsOTOCdZAWElOAfNYn7oq9rKaJJb_hYO7ECpbf7Cn1oVuf1gfZZXXnTsoPLUDm6jSQjKr4sh2YixV9R4DByoMyx60TS-0WLYblDiuRkB17pMdQL2nTYTfv93koRcJGPNVL-WAcZKVlYaC8fDAAmL4TYp4mmWFEkUPXuEObfFrwKyq3tQ=w128-h128-s-no?authuser=0'
-    },
-    {
-      name: 'Search',
-      active: 'https://lh3.googleusercontent.com/4KRfii7XKOdz00bP-6Dp53kePhpKCcHJtItnkpxVOqtlgkeLTtJOe5da8CmhlzkyhD_y4KXtyvLhU2bS4rXF2tJ2sQa93ic8jrOdGNJJzr6l4B18gpjce2BNZ80SBezIt2w1TVFkopvXpxM7cI_b6PLvfmGpMnwlTB72TknqNgXpEaoXoORIIqVIkHilOZUhcdAD_WJ8-e4qjBYLSNMhU_wChyVVKTTAnhVt0a1gORDQsPJCj0lsC0yyRDlJLd_nqsjHUcDDpzvqxbV_3YTu5eIO9Qn5px1G_wqHOI9p-6ephXGi1dxUSwUpY_wENR_X9nQqcKYLGq8BC5Qj7NikmUxzQ_kOfPoqMnlNr3cMNcGP0mqxYSt6neLq4IBaGfENwZ10MOpbmTrlGAHViuKxIWw3zm2xe04J33vsdtYumXlslVTYzmw-21MscjU8N91-9wCxW7MopRVaKTIiXYFIqgjbRBYIl8HFl9AGy84qhAJxEMirjBTUFBwhg2145SSTttnsVNXsOhFgIyxkv-Wz3XaTT6MR-NibPYLQ9kYm3VfiAtTtmm_EaKcNg7zm5i3J4zchWtHf0NXZnbu3Wc772ZTQQ5EBDhQN_qHPNBCWqXKDOyqGM5CX1rwIaA7T7FR_ZjDpx7NzxA3Wk-k65QccSqTls48YCn-9Vvhy8JAv5HsJqyTJqnomq4Pkv6i_fwjzKumX5yocqiLLEMJ3rrZsrpFTQNBDfOMmG-Bo-fZn52fbY8DVOmD1eme-vNnFMPV73z3L30gNAA2niA6QL9v0GNFaf8kv1_HUKJh2iahwC8oADCP1A8d6wDL70F_VJo23wrVzlpRktKu45zNyqgx-hnlK6pRGZF-DH931YrO5DHdfShYnsI0UxW_j-vFl-D7wgmlc-pAPyJeJk8NmMXhUfuBnD6aPGvsNnpRcMKWJwuOGbN_4vnhgucm2pn-toUXmVVQFM6HQEUQNvcy_Ej4=w128-h128-s-no?authuser=0',
-      inactive: 'https://lh3.googleusercontent.com/D9bLa1V2xPxa9aR38eylbbcHR7QYEJCCrpe79a83CelqYmv7tOTn5WhTXqRRzfDTICIuvd4ZA_mVOSdS0zbIBrXTY0sTbotuKJv-VWQraHDhi00tPEgseh7hadhtrVWRSCtPczbDYoCXVp-i0sOZej6rbKI1jY5dE9wc3fMtvMlsbNwTYWAjHH35dQCkKJRr5mQVWSDfNmwbh8Te4gs5HcCumFiQLpdSNJyZnph4iI4E-YyGXyVOsNfmHKFqCbCdkluMTHOHvaDk0viS82sBVX31Aq9_yl350-BdXuTvcxCoA18KB73XodTZFvh_w4CNl7soQBf0ewrxCW0SZ-ppyeb6r_ECg8vUcORvc0r_JTSPGhPG_2iRAAUAYGk-61VCn6oh0dhfW0m_Ek3JlSmwiDCwj00iKQfldLmmzgV36IudpZ4oeyScYjJinrUw5jNImmN1YEgx_3fTo4Bpp5tC7dRdyqp9fdSqGF5BhOLpUu1OW90vKd62gF1dh6aQCG84WRUJCNtJ2sEbd6xmP_5bLBqtvqFQe7Q_tTlVs3t0LRbUX9BQG6-PAOL0GxrJVuWdjkIJB8L6Koj90jLgk1DSHcT3W6L-5r9J0xqIGAXw6M57_LJdSF9pddItiwzn4Jf2xSAvAVze3kjc_Cbwk8qXfqpTLDfV4jxK7lOHyP1KdLLL8O2DKIGdM-LMrobLrnNsv_BxR0sP1fi31e2YkqsPn9E9BCu3BPHL8HcrmDaCWsMB-daryOFtI-khUWDTfnXM4lZbziK8JFebk4aoh_scrg8gKn3AOmIkk0ciOD6s3ve8Jnb8YgBWVsF-t_4QwgfexOARyQceaTRviu7HQLJhGVtmRWHZq0TeTT1HcgC1oWmwbAxqBfQJc6zzjsg7HXmRIQk3giUYkWp0L-Fr57KlLDDy_EeiyEb7heIfHoJus3YE-4ci6qv_CBVneBFnd8vYXaOi6DZNv43hrhW2Rmc=w128-h128-s-no?authuser=0'
-    },
-    {
-      name: 'Reels',
-      active: 'https://lh3.googleusercontent.com/LBznw6au7srJuEBZZTZcVOHyL9HNlINjvasZvmRRa7wfTHvK5x9lRqaQb1O0yUKQEAGShx-QcAsWrEQZ6qeUdkKBsEKuM8xgcHliFOOFvnrc31x7DvvRzNi81r_9JIzcq8JfFJlrh4jYe4_k2oZQxgcXslFG7kA9XM7kXKXKPaI2rJ8S3B5MwkD5XnCrQYNImXb-RJS3xnf3P7cIrnw0eH6eCPLGC1b_n_6b2vAmKFJiZk15xNnT208R43ngtd6VdYESwJnhICEIMqtiuL0nj3-HQFWJmgVkaEswCo5ChZfFh3gkq-y7CIkA86m37aZqdVF0B1c5iR8Wb3WTjfl14E_Qe5Dyq5FYWNpeKP6-aB_EdV8qBgSkzRkHYCwDMgLEi4m3b2rDh8VfKUzTPtD6s9_VuMBcj1lyKxyUzyyTYU7LRzLx-LlJ6FqLUr2UAQny78_bhUIvQuIazKdqrqBcUA0g99NDhML-Q_GDyMjTNs4eWoO_52L01yc8ZmKrlyVdIib6H6uBoXHCdfLTTdfpatYtz6GJeT0ljTnZA3ZSOels34MiLh19O8NnGMGFLh6BNQoofVBbPAzwedNIJl4A2xuCQ3CpNav2AnoMTkLEAiIGWdIipjAVvX4rH5q5xw0nDQ7mVFI7KaLjEhjah2CrqJXBRnmLI7ilKEi9sRJDhGMX4TAZx9da2zjzhGy5VukbtDMaEsTRos0Pqgg4EgkNeAqErCw1-Tt0cvnt3L5I8jIIDv8YnX1m9L8rgo_HDj-htVKQswx6pMErHyxaWtc4LFURz9euhiW2RYu5ycJtcX-6hHZRG-v0UhadRUFpT17XePJfIQiu556e7lzsqV9zdTt26ehOfpqjNrqJbfTqRpOhYB2aNRUc-6yLlGJMIkSE6CUR4tgH_ykuIkvrdvCYYeNXzTcA9Zzx5IVp23o1zGHUJ76XwblPrVWOj5zCWHfRRLMW-p12MY8N_TxhsJ8=w128-h128-s-no?authuser=0',
-      inactive: 'https://lh3.googleusercontent.com/V02h132DapA1B4Q16j9HNJoZ8bP3IzO62zu7BwB8wC8eQ3sTO3mWlX0M-wL79fJNd7eLeq_9wFl7Xoj0XWz0ip-xIlP250NTadCW2ZbmEXPXAarG7oPC5XyfbacknMyxDykK6Y_7k7vjqdR_a6Zgt-vLty9dr1JbSRxD1LiGOJtJ_dyDhcXeM_BISx4epjvZTNSvttb93YhuxE2ZuEqL4dn4GH6JqWeaAymrqIWtMuM57At0HGxbsQkMZcpc_BUi8J5avTfS-bbpFieZi1EX1GJxFN0vBQUNqCM3fT7cCPQJvMVxit6PKaLAKUE1XPqH1BTfmRCHMR4cKNn6mH53kXEnNWBxLZKAez753NPxe8P_a-lDFNAZHGAEbg7ncgKpF7IJZn_yTPiBW-TOutaoiCG9MgewGgNGSe--LmlSCJJbJK0QNPSflrBCQPYKz0wQqkTE4pS1o9jzbZkP6oznHtIeF5Fkamqe0XuXh1MeCYnKQ4jFmw77D-RdR_KNAWdfsGTzKCC6pRAy1x-oUDn2sOUpZx6a8TBHn9hcZRLTxGoHJBJiD2ADq_VyF81SREVU_fkFRo0lhoNQr29KCS5aUcxU4QjZHVge5EUHK5BbJr8mH9XfEJgkfiX93CokLKmrWX8Hbptbb_h9dVVCnDN0hD6JKixsAvvyxXLEwUrZX0DE9v5b-RLjsVR5ovjtw-9cY_LnwmHV_tflwse1o6gtwfD6aXN9QHzH_9cPinKAKh-wmYCUcSvqumeqQualrflLfeLQqJndkF-O3qP8w8FPMqlKjfnjEVthnhqIU4d8bGiE9vAdAgfI2Z2QDaXxopXVlKBhC1sIb6cgQIasKOawMSMcMbduBp_mQSrgcYO1cQWI-ZJ8TTGCOIkQ4L3ZEyFZWXH-VNLCbhEwqib5tC6MBl3En09XNwBkWmHbjRx59FyNWvsjTQ3pcjRMFc1CY4uh8OtmFR7CT7gOAhYDvJg=w128-h128-s-no?authuser=0'
-    },
-    {
-      name: 'Notifications',
-      active: 'https://lh3.googleusercontent.com/JwSlqmqjuyLmzhcpmevufPalT8le-r-QRfM6k4aqXNqMIauW8rnJfIsiBxMRlLAsnD2_Z_nX8kM3QB1keWgWNvDI_wZjwiG6RKBDHmAuamcMVjXdrhSyamO1R3KqvRDiZD0liSuV8xIxOl-0VanDd3vwB6ofOjzIvGgRlSVT5RaBAu_HZaZpUMKC_aX7_vEblNdZjSFJ6WbU40c7TA8mU7Q1RanPhLtiWI_grN8AwrTTDt4SpJSCkt4MFGEixzlhY7SCuL4EdreRIF2_vtaquYcnEJeEl2JcJFZzlBDypjP2UXYec4FIRwhPgp9VZr-vsFX8RoL3X_OH-iE_sjcPvnmIRx9d7w9o-03zpY-Fu2F3tyGzBZVVYwlaZMLwymiIh-W4iLd-h_VqVQRHU7lMOoQiFravl7g4WT_fcZ8TYwcxO4AvCSakRfkXPcCV04NEIZ2Cvx3HQE97GpvP0Riada1jM7K7G__yBTN4UwE7XIY4VeKozkPypxjfIYkWsdg2c1HLYi7HB-PQjrlLciN_1jn-zaOTVVSCglFyPq6z32pcO3rtNMyov7qmuNn6xRD6LM8HzxwhWVEWSse_17wljB1wHUbIhX2H6NSyzsJs0w_UuXS6f2UJqfXrM3OVGk6iBmXOzuiIerSR24YfeKup48f6KqDYUn7NHVsxayaWScziJrOLF0lR7ImdX6V98_lVE-iE0b9SjKaybtWsQwJGffKUhEUGEeq_M2STHbYvNFUcJXv1_K5OR1t267rb463DalzzYMaC94bcGopSyLkfO6v3HSHBymYYH2K585ILDHYEoRwFFF02sBJpm3K9hJxoBalpYAZGvUEV72xxqFs79RVlhl3UFPxcQ8AmlXQNwtqThOl5tqc_McfcBr3IZZsMJMTgFNhwWO7w73mT9H6jfjo5s_ryOhT7VOm5lxv0QMA-EJOLEZKAOgCpWs10LbceVyZCRNm-c2yTznfF_xM=w128-h128-s-no?authuser=0',
-      inactive: 'https://lh3.googleusercontent.com/zsFVuGupnD-CpHxW2v5Z8EurQB-ubYc7dq72YmWM84iT98tPNGTEeu2Fqv78L9EvST2VUICKU1raoMUR_NLwM7W6YKoddKlkpRG2UbPCvwifBw-95R0p0BaabGrPsvEBiqIPC7AdOe3E3pOhhgA0YbHqW2RreHS0CcMB--NS-DIYjZ5T1Ws2gImUPnL-CUmSGLpMYV1J5_xT8kEIu5D2lIetbWvoJmXAu5zBXAEGqSWe-Lf8b6wIypkVJqJK4w_E7PumezTPy2CASqF3oL9q3EhIq71Y2jb1Hd5TRdOCag2IlNt-XIpzP-dDHEP2Kb-vDQ2nny5DBRn64q0X9d_m8RfMun83E_hwEEhc0624fUtMpYGm7hEV5iqOJgVkm5gUIM-tPMf7T0qsNfYDR9HadJf6q8_RbtruWux86DjyEZPerasW99YxCjTyYOpF_Unx8MoiHTKsmYk_ioh6tlPzk73QRu-VpYvra9hV_T3G6tOH7-B13bCGCmMmhpfizslk5nmV2k1vwv3jxbO9Dpz2WYfa9foju8udIw0BLwvbnBaa4Oj_PLJRRlVlzmTl4oRai9UAnZ6acMSRjNY2avWNPStIfSyzO_pNqR-zXZvakPb0lpIgs5O8-ou4V_-9CQSZYSJzGc8dDgFwJUXIE1hFHA_uEHP5T8mQ8kN5X4gCMN0Q-JYgBT9v6ehe51OZ6eugj9aHisfOY6LtMDV_F6F9vgn3sOpBpm1gJEttQ75oPODyYd3QP-e_zO9mMCbddEpMWfKkRb0JDv-CPM8AJfsBkQolq5sKGEXH0ab1sll-2gHX9KutQe0wBh3p5RQIU58t6yzRxs8X6VUoiC1Pyp24AWHT6hrdVDmAzJUpTs74LRIYZWkDXbh-66JBHPLS4sJATBaNb1GbhcKyPpI7nV4CZHCP2PV4owx_4ptdzjx8_pbTT0ktpCb59pG7AJvj0CBRz4gAoZWW7mOVtwXxswA=w128-h128-s-no?authuser=0'
-    },
-    {
-      name: 'Profile',
-      active: 'https://lh3.googleusercontent.com/kbmQqzCPXtLq89Iuk0GJEHulErmDXiEfVm_SEbx2UnzNbdc3PlsJ2nw5CijmqEZBOyWQOvnCn5f2m34KhbXAr0ewuyOrAGvDnG4TiIT-spnR969CnjM__gwSXPQFzi27YMERDo8nDbPZ4JT3wjl3uKumTwHm7xf-eN3s2HvT5hO1GlVf6P1hef7F-ptfaVd2WKcQ_h-SEJb4zEkwQlLCCAd1iJ8gMsdvjgGgXOwMHAfhjICYJqsE4UGBapAtjPmVimP35BXQBXXNsHP_jB6fdgfEaFWuWU2fwD24sayovOVewL0BYeUpYny8dp6KMBllIUxvI0q56A9UJ1k8qQd34_4zwMoA9OZZwhpJ96OSbNS3Oxf0n0b3l72hB--6qlct9GY4sXSXqGsV-4s5m0Ap6QuJ_OupRb4WIAtwm2_tWvNbZK5IDcy9HWXIajLZJuvG7ZP_zGrmPS-q0kxOHRWyYf3UP0tOMH-qrB9TDckFFdz58nApg-Q0UMHrPwAghrnUf5-F64nOzZNr7inCpChkyBDKTiaoBIghk3QmZecTkkaYsgxLAou2zNMJBO6IZi4zwFItoEkYkm9yA9xdsYQGGmQCg1fSNngcmQu2N1k-mx-BL2xr3qqMTPF_dN0WJQO-MlY4PsUAhS_hHc40tAeo0nvVKn-POFjKEBtQXotkJ7b0b3KXwflEHf_DZ7ZNr58oeapezldXc513hKBLauN4O_R3160TE-oI9n8Uy-6xCfEpkXPy9WA3K-CEooMNrb94dkVybbQKFmxpTzyRvGyGWa_X-R19mkEygb8iu-ffLS35cJhLkDNCJNkmcRAP9cSCSQBwvKItXe-L_sGDOB-CNA4mx4VWZUU-88y8XxDoKcbeYQI5oeo3fD2yALL42VlxfzIBmet7N9dDV-E-5iN5ENOV-unoAYBcp58o13CsMJiw7MZlUFb9hN9YV5R_BTLe3YgM0L-lHI7-nr2xJUg=w128-h128-s-no?authuser=0',
-      inactive: 'https://lh3.googleusercontent.com/XLu6zyiyCZyjlVuPeFZhRXh8yAtij83qMZysDqzxxtit0ODhoGQcZN_L7GB5WMINtbBVCTitAKjU2DefxPkiHEcK_zKUEAypwSiFC-v4fub2FtGCEtMaiKhRdQzhxziSEEVsgVLJAsCzawQAH_XMgXxOhUOK68_AARdUa2awV3_2bK3ZuUils8Rymnyyv3y94B3vCzLdrSbAnFrrZZbdMwAw-qSoDZp-HJ13Zkn64hqgEymI312Vh0yXJsdSKxsJ4oJ7Kxrc7NUlH8YuUTvc8OJlIDjVlhlhEEIHOh7pcJBVAcv1e6Sl_RYOqxZ_uvFim5LTWh5K0G4109WbZGPoFwHoMWNDhQGZUzaIzSRNREZ9pHQZlmapOrNNBFda8cRJc8oepIYYF73w_wYTA5MsxyJ0cgkHJKsSJ5jI6UWRbqYI7cOF5Hw-ycY1VDFMAjZOKy5i12j_MiExfcloCbnrIud7zQ_ENJz13qug9hcp58_IUbwGHyKaVB28X2qxgfRYIchbLrkh7_SMrg-_veRIB0ZjZTnSsUKK4Xdn-kJ5BGXm9d7v1qMzYTtIpU47keHAc7EPhClotJnPY6oT1gWGqpYGSLNmiua4b73kfKX3SxEyHpa8wzYgXVGyjlTPfVtQv1DAQ2cidtAhc2uIPJwaSBjwr7QMEr0vLA_FDEyX5W3gy0H1zaQaKG2MpvjYl1O_yynLK8rSJYe5aga2NFdMXYpk08kaJ43BwHojFbQxHW1hp1fXVa91ICR3S5kewUqisPtK2RZQvdqEfH_0hScA_kkx7ayAoWDNGzYiLx7gWgtTYxGUXftYfquPcxmMNH_1z-DtkTC23u9OM0CkLiqfDguR6h-MVXglGSJ9DoD2XxY_8H5QXMgCD1W_-EHUYDvP9ejH3b8kZIUDlXETkzwaq1wfQNbgyYvsM8ayg31F9bHAAgkhsh-jOshcYbjUdr7Dd6pOtXns8k0oHnWFuJc=w128-h128-s-no?authuser=0'
-    },
-  ]
-
-  const [activeTab, setActiveTab] = useState('Home')
-
-
-  const Icon = ({icon}) => (
-    <TouchableOpacity onPress={() => {setActiveTab(icon.name)}}>
-      <Image />
+  const Icon = ({ icon }) => (
+    <TouchableOpacity onPress={() => setActiveTab(icon.name)}>
+      <Image style={styles.icon} source={{ uri: icon.inactive }} />
     </TouchableOpacity>
-  )
+  );
 
   return (
-    <View style={styles.container}>
-      <Text>BottomBar</Text>
+    <View style={{ flex: 1 }}>
+      <Divider width={0.5} color="#383838" />
+      <View style={styles.container}>
+        {icons.map((icon, index) => (
+          <Icon key={index} icon={icon} />
+        ))}
+      </View>
     </View>
-  )
-}
+  );
+};
 
+export const bottomBarIcons = [
+  {
+    name: "Home",
+    active:
+      "https://cvws.icloud-content.com/B/ASMJz5PqSM3VuDw3Rtrx-R1BFAinAbjvMACIiLU6W3THavj3vBcUb2Rc/home+%281%29.png?o=AsHrb1NN-5I6qjqCb9wZKOqAUbvt1qFJ2S1t75eveWaB&v=1&x=3&a=CAogXrCQIfBCh8GAdIbJJ6WVgR17reuun_D-D23gRhlh1nUSbxDzht-d7zAY8-O6n-8wIgEAUgRBFAinWgQUb2RcaicbcFmcA7tKpke0n-PIJ9qgW8p4rWexgN12mAy_huj83BgirWqKhkhyJ_5xIiWUK9zvh6ODTR0cbEP6xc9Eo3huc38oubynZ60vkiQ7gvKEKA&e=1679129752&fl=&r=32bd5a69-a4f3-45eb-89ab-8fafddf86e4e-1&k=PWXc31704Mub11YPyz9z6w&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=53&s=U5Mkh9GrR30TsRSdXyKhTnMG53A&cd=i",
+    inactive:
+      "https://cvws.icloud-content.com/B/ASa1JBDnP65zJFZedsHk5cUS4ATMAZmNdwbtbix-EOTGzyR-HDsZILSb/home.png?o=AnsSef2K3cUgqYTEalh2I2ge3CeNWYY_CDrI7agxpImL&v=1&x=3&a=CAogW-PlJIapDLqqBGINqpypx0qSNThlQjV6xQ3kdTFKY7ISbxDui9-d7zAY7ui6n-8wIgEAUgQS4ATMWgQZILSbaidK8xid4wGMF4Dn8RCjnWc_UAg7XanwReLEml8SWYLdkCbUvQMzpg9yJ6ri2BZs_bnw2iJ100e0wOa4ontpJ_2G1-KknVgghol3WkOmvI4OSw&e=1679129752&fl=&r=a3756526-ece8-4d94-ab8f-1311f83d70a1-1&k=2hFXrZhLGzzP8oxizBJ8_w&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=53&s=SHjV9UGX4b-55jH0_0QHzVsDPLo&cd=i",
+  },
+  {
+    name: "Search",
+    active:
+      "https://cvws.icloud-content.com/B/AebVAnYLZjmbAlGGtvNdn4FAfrQFAS7FfMsuUP9_06kSrL_nnJpJbXiq/magnifying-glass.png?o=Ank1xRSIZw26VRLmKNzenf186oIZ1uu7OaTWyKir5tLW&v=1&x=3&a=CAogT_-GjzXx2IzdVv_QjrrOmCtoeAYaeTMNbIqFb0i8ugcSbxC0-N6d7zAYtNW6n-8wIgEAUgRAfrQFWgRJbXiqaicbR43DUCFynA0x6X722Pkk8QZWmmSB_RjF-cT8IsXyf4XajzQ6tgZyJ5MCeF9y04tq8Wehg288G9VJrSpFEu7L6QLJyolCjoi6pTy0QRQv8w&e=1679129750&fl=&r=9235160e-a2d9-4b52-9deb-5d2272949df1-1&k=s7JmY_e0OpP0Aiaw__BuyQ&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=53&s=S3-tvETan_Jy2ixvjVbR093QJ3M&cd=i",
+    inactive:
+      "https://cvws.icloud-content.com/B/Aej9sv58MoRcOC1ug3_vFk6qnA7LAX_bPr4UhyFmjqlY5lk8xxDQRjM0/search-interface-symbol.png?o=Ar635oHVNZRLnc4a5xrCkb4c1nJGdRowChTsk1dJkLIL&v=1&x=3&a=CAogB8niHapNWue2LR47jUdyHQ3Wgwb3aXuV8r7c6V0Y6vQSbxDP-96d7zAYz9i6n-8wIgEAUgSqnA7LWgTQRjM0aidP6j_SGoTneiM4m778YxIpVAM3syYgGz9xyqsYOC9MjebwyQ29LG1yJ0Wfqubm-CJyRiwKWInQIBxfXdieu7DdXUKlpWbMPd6sW-vlqtNucA&e=1679129750&fl=&r=19482d53-66ce-4080-a09c-2af5edf3fc98-1&k=3qrzH6zHRf_0lA23qOrXgw&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=53&s=fjRHqqQGnY-0f17eu6BcM9SpLno&cd=i",
+  },
+  {
+    name: "Reels",
+    active:
+      "https://cvws.icloud-content.com/B/AfK5D6CPBc9Ia99_QHOkwHTrb2tDATpKFfyxrkXMICWoNdEqRkPpt_p5/video+%281%29.png?o=AlyqgtaHBuf4Ai2H1ci_L6IIR19aVqb0MmsF6giJO8DN&v=1&x=3&a=CAogpYwSLnXJkXVHore26dnICbnfviMYLbzY0wK5hGECo40SbxCw6N6d7zAYsMW6n-8wIgEAUgTrb2tDWgTpt_p5aicNg98SGqX6BxcQv95o7hqT_fpbY6aSuJlhOx5vawt559HsHobcisByJ0REy2lo3-eOXVDPDn0Y7HRQrGYbZLqD99HLdX3lCKKxzrZopS3Eyg&e=1679129748&fl=&r=d8aa16cc-f406-4bbe-b259-84152ea4008f-1&k=dBrOqiGHhBK5-OgcSoYUSQ&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=53&s=fF392jMVUDWC2AloBq1PooTAE1k&cd=i",
+    inactive:
+      "https://cvws.icloud-content.com/B/AfjKTMbzpBefVmsXx12wwjOg1VXIAaPQOYWKrbe0b8j12RFA1eAntNO_/video.png?o=AuYnZrip9EloclefWlbG5wzbUv62RP5Hx47I2WuH8xt0&v=1&x=3&a=CAogRS9CtnWSHVer83e-xG60uoZ6_ZltX_QOWRfd1_ppTxQSbxDe8t6d7zAY3s-6n-8wIgEAUgSg1VXIWgQntNO_aie_PsPNekC98KrvVsRnP0DVB_WhlUjzYPvotCOSlwch9bKfjtJl7rByJzcTlDxcccyG0yZArP6CCEJIyVpnAoT1ONfSW_uwkeQrsyq7Zkx_OQ&e=1679129749&fl=&r=3691fc33-6c39-4725-93e1-0c5c729b6d40-1&k=zdZod8VNR6bmsJ7_UhlEfw&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=53&s=tDFPFBs10oLtz6R8oNjG9c6IDgU&cd=i",
+  },
+  {
+    name: "Notifications",
+    active:
+      "https://cvws.icloud-content.com/B/AebQmjk05-T-GLw_nug6MyfMhwNkAUVUPO6ewYsDc_ako_ztkUIX3o7l/like.png?o=AuTb-9939KM0mwWCL7K_otKNv3k9s6otlVDzQAw6WFuD&v=1&x=3&a=CAogM7V73XnAyIiKyWyLjhMcv8AZ4ICT0P2Cc_470IKHIk0SbxCQ496d7zAYkMC6n-8wIgEAUgTMhwNkWgQX3o7laicqKrYjB8SetmG7_BUUAuAr3l5TTVb4l3qzR1sbtnQtqeqaElyj6JZyJy55xTbuMbEEOU3FcCf5s-lQw5VAls5d81YjYgq2wBrpyTL25Z07lw&e=1679129747&fl=&r=05728a24-3e82-41b7-8056-3a8172223b80-1&k=CI-MFWUdoAUZbce3Ytp8xA&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=53&s=6v3wPkIMlR6jErlg3YFL8K-aIXE&cd=i",
+    inactive:
+      "https://cvws.icloud-content.com/B/AcSN3at8FBhIBMh-OzRgcB0Merx4ASyd0rI-AZCLQ0xbjS6uA8uaXRJ7/heart.png?o=Ao0MZ09kSJUwnSUK3gtTXk-zMDO2Rcq5Sa-jq6kK86XY&v=1&x=3&a=CAog-MR4V-RB5scHt4LEDzKW4_C0-DXZHzdLPc2fBL9jprsSbxC18uCd7zAYtc-8n-8wIgEAUgQMerx4WgSaXRJ7aidet5kh5bZnr-M_Hn34W-ZBTP62UMPmpRxu0AXi949M6LcOxg5a4AJyJxrztxLnvtddEqH3j9X_aYhSbIPrBVP1d67zcH7rBAR7ykAnynSSxg&e=1679129782&fl=&r=6a4697d6-e32e-472c-adfd-3baaff36f2a6-1&k=J4jgofIbbriiDaCysb3xHw&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=53&s=_DdqbW0Ea0zYMjPK0R8wVxZ4bX0&cd=i",
+  },
+  {
+    name: "Profile",
+    active:
+      "https://cvws.icloud-content.com/B/AZ2NmC5q17Xtw6SgehTUN88E0mZwATa3IaOv6U0fUKMG1HSuEBrGqfau/user+%281%29.png?o=Al-y3278WowlUNecTsqfA4Zji7n0ZkBrgxPlR1A0cNL9&v=1&x=3&a=CAogt1o7EtHlZLQ1ZxSWLe8mtYFzemKmF8TPsltRNp-QpaASbxDo0d6d7zAY6K66n-8wIgEAUgQE0mZwWgTGqfauaifu3EDvDAccTqLBvZUg6xY94L5wONxVLvAPxVxtDCgNGtyIzNW6EglyJ_-dI1Smp4oB8NT0wphQRvYNH7ETwbQX8XTqqNEMRhM80fTG8KRYMA&e=1679129745&fl=&r=34fdb508-0f51-420e-8c7d-dc396e075192-1&k=_Uq9P6LXK8gK1ATSekwJhg&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=53&s=ACkGKF0zfc4TAxANKTu9JkDXIPw&cd=i",
+    inactive:
+      "https://cvws.icloud-content.com/B/AQnCF9lSMEbUTHeNyGdh5guaZbf0AXHfoYE1CgRhD_PvBw6uO3EsS5iQ/user.png?o=AqDlXcW1xzqfQXncGZySgU_0bcHH6JKk8vomLw6jCjSx&v=1&x=3&a=CAog5IJMcGkRrl8CRBixMYS53SK94hyCDLxMi4nS42aWeyASbxDu4N6d7zAY7r26n-8wIgEAUgSaZbf0WgQsS5iQaieCiCN3TF5yakSVdIZLCrKA2KusNSMCzG92BUGMimBDD_khn4PmRmRyJ4t5hvatIoXwRDrYJB5tNTiz2unLhhsI17xqwkpYUUrXuw1hrhqnAw&e=1679129747&fl=&r=4ad1690a-2cd4-47d8-88b2-86a5b4dadefb-1&k=QSGTbRiq_Z-ZusL7Gm5z7w&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=53&s=ox5JGaIEWY58JBmdyt0HLVaFwMA&cd=i",
+  },
+];
 
-
-export default BottomBar
+export default BottomBar;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: 'cyan',
-        width: '100%'
-    }
-})
+  container: {
+    flex: 1,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+
+  icon: {
+    width: 24,
+    height: 24,
+  },
+});

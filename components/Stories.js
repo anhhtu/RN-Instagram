@@ -43,7 +43,7 @@ export default Stories;
 const styles = StyleSheet.create({
   container: {
     flex: 2,
-    paddingBottom: 10,
+    paddingVertical: 10,
   },
 
   storyAvatar: {
