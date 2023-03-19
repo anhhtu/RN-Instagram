@@ -7,12 +7,21 @@ const BottomBar = ({ icons }) => {
 
   const Icon = ({ icon }) => (
     <TouchableOpacity onPress={() => setActiveTab(icon.name)}>
-      <Image style={styles.icon} source={{ uri: activeTab === icon.name ? icon.active : icon.inactive }} />
+      <Image
+        style={[
+          styles.icon,
+          icon.name === "Profile" ? styles.profilePic() : null,
+          activeTab == "Profile" && icon.name === activeTab
+            ? styles.profilePic(activeTab)
+            : null,
+        ]}
+        source={{ uri: activeTab === icon.name ? icon.active : icon.inactive }}
+      />
     </TouchableOpacity>
   );
 
   return (
-    <View style={{flex: 1, width: '100%'}}>
+    <View style={{ flex: 1, width: "100%" }}>
       <Divider width={0.5} color="#383838" />
       <View style={styles.container}>
         {icons.map((icon, index) => (
@@ -55,9 +64,9 @@ export const bottomBarIcons = [
   {
     name: "Profile",
     active:
-      "https://cvws.icloud-content.com/B/AZ2NmC5q17Xtw6SgehTUN88E0mZwATa3IaOv6U0fUKMG1HSuEBrGqfau/user+%281%29.png?o=AlTYy-cqeUfUjAkRG5WyQGkw8zYHvRKhW8DyUd_AjVfF&v=1&x=3&a=CAog02koc7jQKZFAsV6TeJK-C7_1MghPwkEuMifWYQ1TslESbxDM1oup7zAYzLPnqu8wIgEAUgQE0mZwWgTGqfauaie9_YntvA2Z-ZK9kQO1vI9XgzxoDbmw3i0tbopOyKV9TecZ9n9lR2lyJ_u_HIQzLT6FitdDzaaEle3AKFFxkXPD6xdjmEI26FPqNWaSgZXTxQ&e=1679153551&fl=&r=02c948a0-5fe1-43f2-9291-442ffe288435-1&k=_Uq9P6LXK8gK1ATSekwJhg&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=53&s=JKi9iHXgYdlsA2tda6stpb3xAn8&cd=i",
+      "https://i.pinimg.com/564x/59/6c/4c/596c4c4d6fb4d9db452030f179cc65ff.jpg",
     inactive:
-      "https://cvws.icloud-content.com/B/AQnCF9lSMEbUTHeNyGdh5guaZbf0AXHfoYE1CgRhD_PvBw6uO3EsS5iQ/user.png?o=AqDlXcW1xzqfQXncGZySgU_0bcHH6JKk8vomLw6jCjSx&v=1&x=3&a=CAog5IJMcGkRrl8CRBixMYS53SK94hyCDLxMi4nS42aWeyASbxDu4N6d7zAY7r26n-8wIgEAUgSaZbf0WgQsS5iQaieCiCN3TF5yakSVdIZLCrKA2KusNSMCzG92BUGMimBDD_khn4PmRmRyJ4t5hvatIoXwRDrYJB5tNTiz2unLhhsI17xqwkpYUUrXuw1hrhqnAw&e=1679129747&fl=&r=4ad1690a-2cd4-47d8-88b2-86a5b4dadefb-1&k=QSGTbRiq_Z-ZusL7Gm5z7w&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=53&s=ox5JGaIEWY58JBmdyt0HLVaFwMA&cd=i",
+      "https://i.pinimg.com/564x/59/6c/4c/596c4c4d6fb4d9db452030f179cc65ff.jpg",
   },
 ];
 
@@ -66,13 +75,21 @@ export default BottomBar;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
 
   icon: {
     width: 24,
     height: 24,
   },
+
+  profilePic: (activeTab = "") => ({
+    borderWidth: activeTab === "Profile" ? 1.5 : 0,
+    borderColor: "white",
+    borderRadius: 20,
+    width: 28,
+    height: 28,
+  }),
 });
