@@ -1,14 +1,20 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import AddNewPost from '../components/newPostComponents/AddNewPost'
 
 const NewPostScreen = () => {
   return (
-    <SafeAreaView>
-      <Text>NewPostScreen</Text>
+    <SafeAreaView style={styles.container}>
+      <AddNewPost/>
     </SafeAreaView>
   )
 }
 
 export default NewPostScreen
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'black',
+    flex: 1,
+  },
+})
