@@ -2,9 +2,10 @@ import { StyleSheet, Text, View, Image, TextInput } from "react-native";
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { Formik } from "formik";
+import { Button, Divider } from "react-native-elements";
 
 const PLACEHOLDER_IMG =
-  "https://cvws.icloud-content.com/B/AZ2NmC5q17Xtw6SgehTUN88E0mZwATa3IaOv6U0fUKMG1HSuEBrGqfau/user+%281%29.png?o=AviM-ZT00nqYo2S0LTagXsB78aAQseEJjSLVp5GL3cTI&v=1&x=3&a=CAogBJqhIm1Ndp6Q_rIa7oXO87-8O8lvsGby5YPU8m6qxzUSbxCQwYPp7zAYkJ7f6u8wIgEAUgQE0mZwWgTGqfauaicduZFl3Oe7Le6zc2HpYlvxzroQuKQkjzfN5WEHrbjjLCAfc00N1SZyJ27On3z3xD-grXqDX8xO0MBGn46NRht2O65uCG5EUZB55VASm6D8WQ&e=1679287635&fl=&r=a68e78b6-7d22-4dbe-9f20-dd261d979254-1&k=_Uq9P6LXK8gK1ATSekwJhg&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=53&s=f87KQUkiKc5DPisiL6gzVNVvLWY&cd=i";
+  "https://cvws.icloud-content.com/B/Ac7YAaOzPAocQ7yVIFEfgxmKWBxZAZsMb5YDdnBY-zVBBsC-oygWVQ-f/pictures.png?o=AqK5KM4A_YPBEV6StL3dxxFR5g0swgeEXCyPTgtrEXDx&v=1&x=3&a=CAog2da1cIQtPJgkUxX6_5nRaQ4na6w6hZSBvaN1AnVThAkSbxD3-cnw7zAY99al8u8wIgEAUgSKWBxZWgQWVQ-faic9MfdC0Rz84QmNTNQJAKQuehNTKXCxT4xyvxjY_c_6xjD_of_--6hyJ_BM_OUrWir8XdVrqeIVmjNC-QjVOuTtxCxvd9wsjYBagGYxIJG4Gg&e=1679303469&fl=&r=65e1f96d-76be-4f29-a3fa-5658d4c227fd-1&k=fADUCphSCITYrMpmXIzLCw&ckc=com.apple.clouddocs&ckz=com.apple.CloudDocs&p=53&s=jSTWeYIJK5cY-Hzd39-5wcZn3H4&cd=i";
 
 const uploadPostSchema = Yup.object().shape({
   imageUrl: Yup.string().url().required("A URL is required"),
@@ -19,23 +20,61 @@ const FormPostUpload = () => {
       initialValues={{ caption: "", imageUrl: "" }}
       onSubmit={(values) => console.log(values)}
       validationSchema={uploadPostSchema}
+      validateOnMount={true}
     >
-      {({handleBlur, handleChange, handleSubmit, values, errors, isValid}) =>
-      <>
-      <View>
-        <Image/>
-      </View>
+      {({
+        handleBlur,
+        handleChange,
+        handleSubmit,
+        values,
+        errors,
+        isValid,
+      }) => (
+        <>
+          <View style={styles.formContainer}>
+            <Image
+              source={{ uri: thumbnailUrl ? thumbnailUrl : PLACEHOLDER_IMG }}
+              style={{ width: 100, height: 100, backgroundColor: "#DBDBDB" }}
+            />
+            <View style={{marginLeft: 10}}>
+              <TextInput
+                style={{ color: "white", fontSize: 20 }}
+                placeholder="Write a caption"
+                placeholderTextColor={"gray"}
+                multiline={true}
+                onChangeText={handleChange("caption")}
+                value={values.caption}
+              />
+            </View>
+          </View>
+          <Divider width={0.5} color={"#383838"} />
+          <TextInput
+            style={{ color: "white", fontSize: 18 }}
+            placeholder="Enter image URL"
+            placeholderTextColor={"gray"}
+            onChange={e => setThumnailUrl(e.nativeEvent.text)}
+            onChangeText={handleChange("imageUrl")}
+            onBlur={handleBlur("imageUrl")}
+            value={values.imageUrl}
+          />
+          {errors.imageUrl && (
+            <Text style={{fontSize: 10, color: 'red'}}>
+              {errors.imageUrl}
+            </Text>
+          )}
 
-      <TextInput
-      placeholder='Write a caption' placeholderTextColor={'gray'}/>
-      <TextInput
-      placeholder='Enter image URL' placeholderTextColor={'gray'}/>
-      </>
-      }
+          <Button onPress={handleSubmit} title='Share' disabled={!isValid}/>
+        </>
+      )}
     </Formik>
   );
 };
 
 export default FormPostUpload;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  formContainer: {
+    margin: 20,
+    flexDirection: "row",
+  },
+});
