@@ -36,7 +36,7 @@ const FormPostUpload = () => {
               source={{ uri: thumbnailUrl ? thumbnailUrl : PLACEHOLDER_IMG }}
               style={{ width: 100, height: 100, backgroundColor: "#DBDBDB" }}
             />
-            <View style={{marginLeft: 10}}>
+            <View style={{ marginLeft: 10 }}>
               <TextInput
                 style={{ color: "white", fontSize: 20 }}
                 placeholder="Write a caption"
@@ -52,18 +52,18 @@ const FormPostUpload = () => {
             style={{ color: "white", fontSize: 18 }}
             placeholder="Enter image URL"
             placeholderTextColor={"gray"}
-            onChange={e => setThumnailUrl(e.nativeEvent.text)}
+            onChange={(e) => setThumnailUrl(e.nativeEvent.text)}
             onChangeText={handleChange("imageUrl")}
             onBlur={handleBlur("imageUrl")}
             value={values.imageUrl}
           />
           {errors.imageUrl && (
-            <Text style={{fontSize: 10, color: 'red'}}>
+            <Text style={{ fontSize: 10, color: "red" }}>
               {errors.imageUrl}
             </Text>
           )}
 
-          <Button onPress={handleSubmit} title='Share' disabled={!isValid}/>
+          <Button onPress={handleSubmit} title="Share" disabled={!isValid} />
         </>
       )}
     </Formik>

@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { Divider } from "react-native-elements";
 
@@ -113,7 +107,7 @@ const CommentSection = ({ post }) => (
 const Comments = ({ post }) => (
   <>
     {post.comments.map((comment, index) => (
-      <View style={{marginTop: 4}} key={index}>
+      <View style={{ marginTop: 4 }} key={index}>
         <Text style={{ color: "white" }}>
           <Text style={{ fontWeight: "600" }}>{comment.username}</Text>{" "}
           {comment.comment}

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
-const Header = ({navigation}) => {
+const Header = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity>
@@ -12,12 +12,9 @@ const Header = ({navigation}) => {
       </TouchableOpacity>
 
       <View style={styles.iconsContainer}>
-        <TouchableOpacity onPress={() => navigation.push('NewPostScreen')}>
+        <TouchableOpacity onPress={() => navigation.push("NewPostScreen")}>
           <View style={styles.iconsWrapper}>
-            <Image
-              source={require("../assets/more.png")}
-              style={styles.icon}
-            />
+            <Image source={require("../assets/more.png")} style={styles.icon} />
           </View>
         </TouchableOpacity>
 
@@ -46,7 +43,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 10,
-    width: '100%',
+    width: "100%",
   },
 
   logo: {
@@ -72,20 +69,20 @@ const styles = StyleSheet.create({
   },
 
   unreadBadge: {
-    backgroundColor: '#FF3250',
-    position: 'absolute',
+    backgroundColor: "#FF3250",
+    position: "absolute",
     left: 20,
     bottom: 21,
     width: 20,
     height: 18,
     borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     zIndex: 1,
   },
 
   unreadBadgeText: {
-    color: 'white',
-    fontWeight: '600',
-  }
+    color: "white",
+    fontWeight: "600",
+  },
 });

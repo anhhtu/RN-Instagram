@@ -12,9 +12,12 @@ const Stories = () => {
             source={require("../assets/user.png")}
           />
           <View style={styles.addStoryIcon}>
-            <Image source={require('../assets/add.png')} style={{width: 11, height: 11}}/>
+            <Image
+              source={require("../assets/add.png")}
+              style={{ width: 11, height: 11 }}
+            />
           </View>
-          <Text style={{color: '#DBDBDB', fontSize: 11.5}}>Your story</Text>
+          <Text style={{ color: "#DBDBDB", fontSize: 11.5 }}>Your story</Text>
         </View>
 
         {USERS.map((story, index) => (
@@ -66,12 +69,12 @@ const styles = StyleSheet.create({
   },
 
   storyAvatarWrapper: {
-    borderWidth: 2.5, 
-    borderColor: '#FFBFA9', 
-    borderRadius: 50, 
-    alignItems: 'center', 
-    justifyContent: 'center', 
-    marginBottom: 6
+    borderWidth: 2.5,
+    borderColor: "#FFBFA9",
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 6,
   },
 
   addStory: {
@@ -84,14 +87,14 @@ const styles = StyleSheet.create({
   addStoryIcon: {
     width: 25,
     height: 25,
-    backgroundColor: '#0095FC',
+    backgroundColor: "#0095FC",
     borderWidth: 3,
-    borderColor: 'black',
+    borderColor: "black",
     borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
     left: 42,
     top: 48,
-  }
+  },
 });

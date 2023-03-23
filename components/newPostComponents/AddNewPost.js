@@ -2,16 +2,16 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import FormPostUpload from "./FormPostUpload";
 
-const AddNewPost = ({navigation}) => {
+const AddNewPost = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Header navigation={navigation}/>
-      <FormPostUpload/>
+      <Header navigation={navigation} />
+      <FormPostUpload />
     </View>
   );
 };
 
-const Header = ({navigation}) => (
+const Header = ({ navigation }) => (
   <View style={styles.headerContainer}>
     <TouchableOpacity onPress={() => navigation.goBack()}>
       <Image
