@@ -6,10 +6,10 @@ import BottomBar, { bottomBarIcons } from "../components/BottomBar";
 import Stories from "../components/Stories";
 import { POSTS } from "../data/posts";
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header navigation={navigation}/>
+      <Header navigation={navigation} />
       <View style={{ flex: 14 }}>
         <ScrollView>
           <Stories />
@@ -18,7 +18,7 @@ const HomeScreen = ({navigation}) => {
           ))}
         </ScrollView>
       </View>
-      <BottomBar icons={bottomBarIcons}/>
+      <BottomBar icons={bottomBarIcons} />
     </SafeAreaView>
   );
 };
