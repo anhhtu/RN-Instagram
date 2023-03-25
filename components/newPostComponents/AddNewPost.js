@@ -6,7 +6,7 @@ const AddNewPost = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Header navigation={navigation} />
-      <FormPostUpload />
+      <FormPostUpload navigation={navigation} />
     </View>
   );
 };

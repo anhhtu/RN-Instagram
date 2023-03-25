@@ -12,13 +12,16 @@ const uploadPostSchema = Yup.object().shape({
   caption: Yup.string().max(2200, "Caption has reached the character"),
 });
 
-const FormPostUpload = () => {
+const FormPostUpload = ({navigation}) => {
   const [thumbnailUrl, setThumnailUrl] = useState(PLACEHOLDER_IMG);
 
   return (
     <Formik
       initialValues={{ caption: "", imageUrl: "" }}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) => {
+        console.log(values)
+        navigation.goBack()
+      }}
       validationSchema={uploadPostSchema}
       validateOnMount={true}
     >
