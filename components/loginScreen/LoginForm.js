@@ -48,9 +48,9 @@ const LoginForm = () => {
                   {
                     borderColor:
                       values.email.length < 1 || Validator.validate(values.email)
-                        ? "#CCC"
+                        ? "#282828"
                         : "red",
-                  },]}
+                  }]}
               />
               <TextInput
                 placeholder="Password"
@@ -62,7 +62,14 @@ const LoginForm = () => {
                 onChangeText={handleChange("password")}
                 onBlur={handleBlur("password")}
                 value={values.password}
-                style={styles.textInput}
+                style={[styles.textInput,
+                  {
+                    borderColor:
+                      values.email.length < 1 || Validator.validate(values.email)
+                        ? "#282828"
+                        : "red",
+                  }
+                ]}
               />
             </View>
 
