@@ -31,7 +31,9 @@ const LoginForm = () => {
       >
         {({ handleChange, handleBlur, handleSubmit, values, isValid }) => (
           <>
-            <View style={styles.inputView}>
+            <View
+              style={styles.inputView}
+            >
               <TextInput
                 placeholder="Phone number, username or email"
                 placeholderTextColor={"#8D8D8D"}
@@ -39,10 +41,16 @@ const LoginForm = () => {
                 keyboardType="email-address"
                 textContentType="emailAddress"
                 autoFocus={true}
-                onChangeText={handleChange('email')}
-                onBlur={handleBlur('email')}
+                onChangeText={handleChange("email")}
+                onBlur={handleBlur("email")}
                 value={values.email}
-                style={styles.textInput}
+                style={[styles.textInput,
+                  {
+                    borderColor:
+                      values.email.length < 1 || Validator.validate(values.email)
+                        ? "#CCC"
+                        : "red",
+                  },]}
               />
               <TextInput
                 placeholder="Password"
@@ -51,8 +59,8 @@ const LoginForm = () => {
                 autoCorrect={false}
                 secureTextEntry={true}
                 textContentType={"password"}
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
+                onChangeText={handleChange("password")}
+                onBlur={handleBlur("password")}
                 value={values.password}
                 style={styles.textInput}
               />
@@ -67,7 +75,11 @@ const LoginForm = () => {
                 </Text>
               </TouchableOpacity>
             </View>
-            <Pressable style={styles.loginButton}>
+            <Pressable
+              style={styles.loginButton(isValid)}
+              onPress={handleSubmit}
+              disabled={!isValid}
+            >
               <Text
                 style={{
                   color: "white",
@@ -96,12 +108,13 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     backgroundColor: "#171717",
     borderColor: "#282828",
+    color: "white",
   },
 
-  loginButton: {
+  loginButton: (isValid) => ({
     marginTop: 30,
-    backgroundColor: "#008BDD",
+    backgroundColor: isValid ? "#008BDD" : "#47C4FF",
     padding: 15,
     borderRadius: 5,
-  },
+  }),
 });
