@@ -12,8 +12,9 @@ import {
   import Validator from "email-validator";
   
   const SignupForm = () => {
-    const LoginFormSchema = Yup.object().shape({
+    const SignupFormSchema = Yup.object().shape({
       email: Yup.string().email().required("An email is required"),
+      username: Yup.string().required().min(4, 'A username is required'),
       password: Yup.string()
         .required()
         .min(8, "Password has to have at least 8 characters"),
@@ -22,11 +23,11 @@ import {
     return (
       <View>
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{ email: "", username: "", password: "" }}
           onSubmit={(values) => {
             console.log(values);
           }}
-          validationSchema={LoginFormSchema}
+          validationSchema={SignupFormSchema}
           validateOnMount={true}
         >
           {({ handleChange, handleBlur, handleSubmit, values, isValid }) => (
@@ -35,7 +36,7 @@ import {
                 style={styles.inputView}
               >
                 <TextInput
-                  placeholder="Phone number, username or email"
+                  placeholder="Email"
                   placeholderTextColor={"#8D8D8D"}
                   autoCapitalize="none"
                   keyboardType="email-address"
@@ -51,6 +52,23 @@ import {
                           ? "#282828"
                           : "red",
                     }]}
+                />
+                <TextInput
+                  placeholder="Username"
+                  placeholderTextColor={"#8D8D8D"}
+                  autoCapitalize="none"
+                  textContentType={"username"}
+                  onChangeText={handleChange("username")}
+                  onBlur={handleBlur("username")}
+                  value={values.username}
+                  style={[styles.textInput,
+                    {
+                      borderColor:
+                        values.username.length < 1 || values.username.length >= 4
+                          ? "#282828"
+                          : "red",
+                    }
+                  ]}
                 />
                 <TextInput
                   placeholder="Password"
@@ -73,17 +91,8 @@ import {
                 />
               </View>
   
-              <View style={{ alignItems: "flex-end" }}>
-                <TouchableOpacity>
-                  <Text
-                    style={{ fontWeight: "600", color: "#008BDD", marginTop: 5 }}
-                  >
-                    Forgot password?
-                  </Text>
-                </TouchableOpacity>
-              </View>
               <Pressable
-                style={styles.loginButton(isValid)}
+                style={styles.signupButton(isValid)}
                 onPress={handleSubmit}
                 disabled={!isValid}
               >
@@ -94,7 +103,7 @@ import {
                     fontWeight: "600",
                   }}
                 >
-                  Log in
+                  Sign up
                 </Text>
               </Pressable>
             </>
@@ -118,7 +127,7 @@ import {
       color: "white",
     },
   
-    loginButton: (isValid) => ({
+    signupButton: (isValid) => ({
       marginTop: 30,
       backgroundColor: isValid ? "#008BDD" : "#47C4FF",
       padding: 15,

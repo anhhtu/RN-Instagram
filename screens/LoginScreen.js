@@ -3,8 +3,9 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LoginForm from "../components/loginScreen/LoginForm";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import SignupScreen from "./SignupScreen";
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topView}>
@@ -28,7 +29,7 @@ const LoginScreen = () => {
 
       <View style={styles.bottomView}>
         <Text style={{ color: "#8D8D8D" }}>Don't have an account?</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.push('SignupScreen')}>
           <Text style={{ color: "#008BDD", fontWeight: "600" }}> Sign Up.</Text>
         </TouchableOpacity>
       </View>

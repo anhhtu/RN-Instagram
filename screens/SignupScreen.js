@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import SignupForm from "../components/signupScreen/SignupForm";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const SignupScreen = () => {
+const SignupScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topView}>
@@ -26,8 +26,12 @@ const SignupScreen = () => {
         <SignupForm />
       </View>
 
-      <View style={styles.bottomView}></View>
-
+      <View style={styles.bottomView}>
+        <Text style={{ color: "#8D8D8D" }}>Already have an account?</Text>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={{ color: "#008BDD", fontWeight: "600" }}> Log In.</Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
@@ -65,5 +69,8 @@ const styles = StyleSheet.create({
 
   bottomView: {
     flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "flex-end",
   },
 });
