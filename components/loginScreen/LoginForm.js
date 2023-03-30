@@ -65,7 +65,7 @@ const LoginForm = () => {
                 style={[styles.textInput,
                   {
                     borderColor:
-                      values.email.length < 1 || Validator.validate(values.email)
+                      values.password.length < 1 || values.password.length >= 8
                         ? "#282828"
                         : "red",
                   }
